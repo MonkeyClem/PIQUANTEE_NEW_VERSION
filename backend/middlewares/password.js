@@ -1,4 +1,4 @@
-// IMPORT DE : passwordValidator
+// IMPORT DE : passwordValidator 
 const passwordValidator = require('password-validator')
 
 // We create a newSchema for the password
@@ -14,3 +14,14 @@ passwordSchema
 .has().not().spaces()                           // Should not have spaces
 .is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values
 
+module.exports = (req, res, next) => {
+    if(passwordSchema.validate(req.body.password)){
+        next()
+    }
+    else{
+        return res.status(400).json({error: "The password isn't strong enough : " + passwordSchema.validate(req.body.password, { details: true })})
+        //SI NOUS LAISSONS ERROR TELLE QUELLE : Illisibile
+        //return res.status(400).json({error : error}) //Mettre en 401 ?
+
+    }
+}
