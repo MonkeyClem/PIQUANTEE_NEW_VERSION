@@ -17,7 +17,7 @@ console.log(User)
 //Création de la fonction signup
 exports.signup = (req, res, next) => {
 
-    console.log("CONTENU DE : req.body")
+    console.log("CONTENU DE : req.body (controllers/signup)")
     console.log(req.body)
 
     //PASSWORD HASH
@@ -44,6 +44,20 @@ exports.signup = (req, res, next) => {
 //Création de la fonction signup
 
 exports.login = (req, res, next) => {
+
+//LE CONTENU DE LA REQUETE
+console.log("CONTENU DE : req.body (controllers/login)")
+console.log(req.body.email)
+
+//First, we look into the database to know if the mail adress is already registered or not
+User.findOne({email: req.body.email})
+    .then((user) => {
+        if(!user){
+            return res.status(400).json({error : 'Unexistant User'})
+        }
+        res.status(200).json({message: "A similar mail adress has been found"})
+    })
+    .catch((error) => res.status(500).json({error}));
 
 }
 
