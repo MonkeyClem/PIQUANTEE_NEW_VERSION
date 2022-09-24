@@ -33,13 +33,17 @@ exports.signup = (req, res, next) => {
         console.log(user)
         //Envoi vers la base de données MongoDB Atlas
         user.save()
-        .then(() =>
-                    res.status(201).json({message: "Nouvel utilisateur crée et sauvegardé"}))
-        .catch((error) => 
-                    res.status(500).json({error : error})) //Mettre en 401 ?
+        .then(() => res.status(201).json({message: "Nouvel utilisateur crée et sauvegardé"}))
+        .catch((error) => res.status(500).json({error : error})) //Mettre en 401 ?
     })
     .catch((error) => res.status(500).json({error : error}))
 
-  
+}
+
+
+//Création de la fonction signup
+
+exports.login = (req, res, next) => {
+
 }
 
