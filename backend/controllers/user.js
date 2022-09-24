@@ -55,7 +55,24 @@ User.findOne({email: req.body.email})
         if(!user){
             return res.status(400).json({error : 'Unexistant User'})
         }
-        res.status(200).json({message: "A similar mail adress has been found"})
+
+        //CONTROL THE PASSWORD 
+        bcrypt.compare(req.body.password, user.password)
+            .then((controlPassword) => {
+                console.log('résultat de controlPassword :')
+                console.log(controlPassword)
+
+                //Si le controle nous retourne false 
+                if(!controlPassword){
+                    res.status(401).json({error : 'Le mot de passe est incorrect'})
+                }
+
+                res.status(200).json({message: "The password is correct"})
+        })
+            .catch((error) => res.status(500).json({error}))
+
+
+        // res.status(200).json({message: "A similar mail adress has been found"})
     })
     .catch((error) => res.status(500).json({error}));
 
