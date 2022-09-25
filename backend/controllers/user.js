@@ -1,5 +1,7 @@
 //IMPORT DE : bcrypt pour le hash du mot de passe
 const bcrypt = require ('bcrypt');
+//IMPORT : javascriptwebtoken;
+const jwt = require('jsonwebtoken')
 //IMPORT DE : schéma d'utilisateur (../models/user), qui nous servira ensuite à la création/vérification d'utilisateur
 const User = require('../models/user')
 //IMPORTATION DE : module CORS, permettant d'éviter les erreurs relatives à l'origine de la requête 
@@ -66,8 +68,17 @@ User.findOne({email: req.body.email})
                 if(!controlPassword){
                     res.status(401).json({error : 'Le mot de passe est incorrect'})
                 }
-
-                res.status(200).json({message: "The password is correct"})
+                //The password is correct
+                //Envoi du userId et du Token dans la response 
+                res.status(200).json({
+                    userId : user._id,
+                    token : jwt.sign(
+                        ///3 arguments :
+                        {userId: user._id},
+                        `${process.env.JWT_KEY_TOKEN}`,
+                        {expiresIn: 2}
+                    )
+                })
         })
             .catch((error) => res.status(500).json({error}))
 
