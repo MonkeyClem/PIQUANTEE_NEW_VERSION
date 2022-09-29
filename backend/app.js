@@ -8,6 +8,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 //IMPORT DE : Routes 
 const userRoutes = require("./routes/user")
+const FicheSauceRoutes = require("./routes/FicheSauce")
 const bodyParser = require('body-parser')
 app.use(cors())
 
@@ -45,6 +46,9 @@ app.use(bodyParser.json())
 
 //LA ROUTE D'AUTHENTIFICATION
 app.use('/api/auth/', userRoutes);
+
+//LA ROUTE DE LA FICHE SAUCE
+app.use('/api/' , FicheSauceRoutes)
 
 //MODULE EXPORTATION
 module.exports = app;
