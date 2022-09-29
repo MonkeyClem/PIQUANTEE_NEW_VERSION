@@ -10,7 +10,12 @@ console.log(ficheSauce)
 const router = express.Router();
 
 //Les Routes
-router.post('/sauces/', ficheSauce.createFicheSauce)
+router.post('/sauces/', ficheSauce.createFicheSauce);
+
+router.get('/sauces/', ficheSauce.getAllSauce);
+
+//Affichage d'un objet selon son ID
+router.get("/sauces/:id", ficheSauce.getOneSauce)
 //Exportation du module
 
 module.exports = router;
