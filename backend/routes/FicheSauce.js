@@ -12,11 +12,15 @@ const router = express.Router();
 //Les Routes
 router.post('/sauces/', ficheSauce.createFicheSauce);
 
+//L'affichage de toute les sauces
 router.get('/sauces/', ficheSauce.getAllSauce);
 
 //Affichage d'un objet selon son ID
-router.get("/sauces/:id", ficheSauce.getOneSauce)
-//Exportation du module
+router.get("/sauces/:id", ficheSauce.getOneSauce);
 
+//Modification d'une sauce via son ID
+router.put("/sauces/:id", ficheSauce.updateOneSauce);
+
+//Exportation du module
 module.exports = router;
 
