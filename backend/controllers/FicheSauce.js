@@ -69,6 +69,18 @@ exports.updateOneSauce = (req, res, next) => {
     console.log({id : req.params.id})
     ModelSauce
         .updateOne({id: req.params.id}, {...req.body})
-        .then(()=> res.status(200).json({message: "Object has been update"}))
+        .then(()=> res.status(200).json({message: "Object has been updated"}))
+        .catch(error => res.status(400).json({error}))
+}
+
+exports.deleteOneSauce = (req, res, next) => {
+    console.log("Contenu du corps de la requête de deleteOneSauce (controllers/FicheSauce.js")
+    console.log(req.body)
+    console.log("Contenu du req.params.id de deleteOneSauce")
+    console.log(req.params.id)
+    console.log({id : req.params.id})
+    ModelSauce
+        .deleteOne({id: req.params.id})
+        .then(()=> res.status(200).json({message: "Object has been deleted"}))
         .catch(error => res.status(400).json({error}))
 }

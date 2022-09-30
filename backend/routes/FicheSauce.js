@@ -21,6 +21,9 @@ router.get("/sauces/:id", ficheSauce.getOneSauce);
 //Modification d'une sauce via son ID
 router.put("/sauces/:id", ficheSauce.updateOneSauce);
 
+//Suppression d'une sauce
+router.delete("/sauces/:id", ficheSauce.deleteOneSauce);
+
 //Exportation du module
 module.exports = router;
 
