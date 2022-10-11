@@ -11,10 +11,10 @@ exports.createFicheSauce = (req, res, next) => {
     console.log(req.body)
 
     console.log("req.body.ModelSauce du fichier controllers/FicheSauce.js")
-    console.log(req.body.ModelSauce)
+    console.log(req.body)
 
     //Ici, pas besoin d'utiliser un json.parse() pour le req.body.ModelSauce
-    const sauceModelObject = req.body.ModelSauce
+    const sauceModelObject = req.body
     console.log("contenu de la const sauceModelObject du fichier controllers/FicheSauce.js")
     console.log(sauceModelObject)
 

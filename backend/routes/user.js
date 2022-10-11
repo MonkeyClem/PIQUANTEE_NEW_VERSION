@@ -16,7 +16,7 @@ console.log(userController)
 router.post("/signup", password, userController.signup)
 
 //LOGIN ROUTE
-router.post("/login" ,userController.login)
+router.post("/login" ,  userController.login)
 
 //Exportation du module 
 

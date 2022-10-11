@@ -76,7 +76,7 @@ User.findOne({email: req.body.email})
                         ///3 arguments :
                         {userId: user._id},
                         `${process.env.JWT_KEY_TOKEN}`,
-                        {expiresIn: 2}
+                        {expiresIn: 3600}
                     )
                 })
         })

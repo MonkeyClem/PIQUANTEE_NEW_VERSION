@@ -8,21 +8,22 @@ console.log(ficheSauce)
 
 //La fonction Router du framework d'Express
 const router = express.Router();
+const authentification = require('../middlewares/authentification')
 
 //Les Routes
-router.post('/sauces/', ficheSauce.createFicheSauce);
+router.post('/sauces/', authentification, ficheSauce.createFicheSauce);
 
 //L'affichage de toute les sauces
-router.get('/sauces/', ficheSauce.getAllSauce);
+router.get('/sauces/', authentification, ficheSauce.getAllSauce);
 
 //Affichage d'un objet selon son ID
-router.get("/sauces/:id", ficheSauce.getOneSauce);
+router.get("/sauces/:id", authentification, ficheSauce.getOneSauce);
 
 //Modification d'une sauce via son ID
-router.put("/sauces/:id", ficheSauce.updateOneSauce);
+router.put("/sauces/:id", authentification, ficheSauce.updateOneSauce);
 
 //Suppression d'une sauce
-router.delete("/sauces/:id", ficheSauce.deleteOneSauce);
+router.delete("/sauces/:id", authentification, ficheSauce.deleteOneSauce);
 
 //Exportation du module
 module.exports = router;
