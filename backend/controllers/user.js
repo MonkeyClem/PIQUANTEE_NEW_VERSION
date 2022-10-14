@@ -66,7 +66,10 @@ User.findOne({email: req.body.email})
 
                 //Si le controle nous retourne false 
                 if(!controlPassword){
-                    res.status(401).json({error : 'Le mot de passe est incorrect'})
+                    console.log("Le MDP n'est pas correct")
+                    throw("Le MDP n'est pas correct")
+                    //A VOIR AVEC RIDA : si res.status = HTTP ERROS SENDT
+                    // res.status(401).json({error : 'Le mot de passe est incorrect'})
                 }
                 //The password is correct
                 //Envoi du userId et du Token dans la response 

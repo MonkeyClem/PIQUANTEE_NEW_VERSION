@@ -6,18 +6,21 @@ const express = require("express");
 const ficheSauce = require("../controllers/FicheSauce")
 console.log(ficheSauce)
 
+//Importation du middleware multer.js 
+const multer = require("../middlewares/multer")
+
 //La fonction Router du framework d'Express
 const router = express.Router();
 const authentification = require('../middlewares/authentification')
-
+const authentificationGet = require ('../middlewares/authentificationGet')
 //Les Routes
-router.post('/sauces/', authentification, ficheSauce.createFicheSauce);
+router.post('/sauces/', authentification, multer, ficheSauce.createFicheSauce);
 
 //L'affichage de toute les sauces
-router.get('/sauces/', authentification, ficheSauce.getAllSauce);
+router.get('/sauces/', authentificationGet, ficheSauce.getAllSauce);
 
 //Affichage d'un objet selon son ID
-router.get("/sauces/:id", authentification, ficheSauce.getOneSauce);
+router.get("/sauces/:id", authentificationGet, ficheSauce.getOneSauce);
 
 //Modification d'une sauce via son ID
 router.put("/sauces/:id", authentification, ficheSauce.updateOneSauce);
