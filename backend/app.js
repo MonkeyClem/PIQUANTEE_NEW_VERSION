@@ -12,6 +12,8 @@ const FicheSauceRoutes = require("./routes/FicheSauce")
 const bodyParser = require('body-parser')
 app.use(cors())
 
+const path = require('path')
+
 // app.use((req, res, next) => {
 //     res.setHeader('Access-Control-Allow-Origin', '*');
 //     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -49,6 +51,8 @@ app.use('/api/auth/', userRoutes);
 
 //LA ROUTE DE LA FICHE SAUCE
 app.use('/api/' , FicheSauceRoutes)
+
+app.use('/image', express.static(path.join(__dirname, 'image')))
 
 //MODULE EXPORTATION
 module.exports = app;

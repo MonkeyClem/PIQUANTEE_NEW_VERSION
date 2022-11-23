@@ -6,6 +6,9 @@ const express = require("express");
 const ficheSauce = require("../controllers/FicheSauce")
 console.log(ficheSauce)
 
+//Import Like controller
+const like = require("../controllers/like")
+
 //Importation du middleware multer.js 
 const multer = require("../middlewares/multer")
 
@@ -20,13 +23,17 @@ router.post('/sauces/', authentification, multer, ficheSauce.createFicheSauce);
 router.get('/sauces/', authentificationGet, ficheSauce.getAllSauce);
 
 //Affichage d'un objet selon son ID
-router.get("/sauces/:id", authentificationGet, ficheSauce.getOneSauce);
+router.get("/sauces/:id", authentification, ficheSauce.getOneSauce);
 
 //Modification d'une sauce via son ID
 router.put("/sauces/:id", authentification, ficheSauce.updateOneSauce);
 
 //Suppression d'une sauce
 router.delete("/sauces/:id", authentification, ficheSauce.deleteOneSauce);
+
+//Routes like et dislike
+
+router.post("/sauces/:id/like", authentification, like.likeFicheSauce);
 
 //Exportation du module
 module.exports = router;
