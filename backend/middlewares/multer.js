@@ -11,8 +11,6 @@ const MIME_TYPES = {
     "image/png" : "png"
 }
 
-console.log(MIME_TYPES)
-
 //La destination du fichier (répertoire) et génerer un nom de fichier unique 
 const storage = multer.diskStorage({
     //La destination de stockage du fichier
@@ -28,9 +26,6 @@ const storage = multer.diskStorage({
     }
 }
 )
-console.log("MULTER CONST STORAGE")
-console.log(storage)
-
 //Exportation 
 module.exports = multer({storage}).single('image')
 

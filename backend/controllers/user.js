@@ -35,9 +35,7 @@ exports.signup = (req, res, next) => {
 
 }
 
-
 //Création de la fonction signup
-
 exports.login = (req, res, next) => {
 
 //LE CONTENU DE LA REQUETE
@@ -47,7 +45,6 @@ User.findOne({email: req.body.email})
         if(!user){
             return res.status(400).json({error : 'Unexistant User'})
         }
-
         //CONTROL THE PASSWORD 
         bcrypt.compare(req.body.password, user.password)
             .then((controlPassword) => {
@@ -73,6 +70,5 @@ User.findOne({email: req.body.email})
             // res.status(200).json({message: "A similar mail adress has been found"})
     })
     .catch((error) => res.status(500).json({error}));
-
 }
 
