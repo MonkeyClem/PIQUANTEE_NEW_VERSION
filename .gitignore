@@ -2,6 +2,7 @@
 node_modules
 
 image
+
 # Compiled output
 /dist
 /tmp
