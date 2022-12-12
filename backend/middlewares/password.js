@@ -20,8 +20,5 @@ module.exports = (req, res, next) => {
     }
     else{
         return res.status(400).json({error: "The password isn't strong enough : " + passwordSchema.validate(req.body.password, { details: true })})
-        //SI NOUS LAISSONS ERROR TELLE QUELLE : Illisibile
-        //return res.status(400).json({error : error}) //Mettre en 401 ?
-
     }
 }

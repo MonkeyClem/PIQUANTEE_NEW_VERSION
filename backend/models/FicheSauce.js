@@ -1,7 +1,6 @@
 //IMPORT OF : Mongoose
 const mongoose = require('mongoose')
 
-
 //DataBase Model Sauce for frontend 
 const ModelSauce = mongoose.Schema({
     name: {type: String, required: true},

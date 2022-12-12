@@ -2,13 +2,13 @@
 const bcrypt = require ('bcrypt');
 //IMPORT : javascriptwebtoken;
 const jwt = require('jsonwebtoken')
-//IMPORT DE : schéma d'utilisateur (../models/user), qui nous servira ensuite à la création/vérification d'utilisateur
+//IMPORT DE : schéma d'utilisateur (../models/user), qui sera utiliser lors la création/vérification d'utilisateur
 const User = require('../models/user')
 //IMPORTATION DE : module CORS, permettant d'éviter les erreurs relatives à l'origine de la requête 
 var cors = require('cors');
 //IMPORTATION DE : express
 const express = require('express')
-//Lancement de l'application express 
+//Stockage de la méthode express() dans la constante app
 app = express()
 //Utilisation du module CORS sur chacune des requêtes traitées 
 app.use(cors());
@@ -84,9 +84,7 @@ User.findOne({email: req.body.email})
                 })
         })
             .catch((error) => res.status(500).json({error}))
-
-
-        // res.status(200).json({message: "A similar mail adress has been found"})
+            // res.status(200).json({message: "A similar mail adress has been found"})
     })
     .catch((error) => res.status(500).json({error}));
 

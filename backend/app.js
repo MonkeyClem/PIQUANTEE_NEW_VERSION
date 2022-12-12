@@ -1,27 +1,22 @@
-//IMPORT DE : module express, que nous stockons dans la constante app
+//IMPORT DE : module express, que nous stockons dans la constante app afin de créer une application express
 const express = require('express');
-//Pour créer une application express
 const app = express();
+
 //IMPORT DE : module CORS, permettant d'éviter les erreurs relatives à l'origine de la requête 
 const cors = require('cors');
-//IMPORT DE : mongoose
-const mongoose = require('mongoose');
+//Lorsque une requête est envoyée, le module CORS est systématiquement utilisé. 
+app.use(cors());
+
+
 //IMPORT DE : Routes 
-const userRoutes = require("./routes/user")
-const FicheSauceRoutes = require("./routes/FicheSauce")
-const bodyParser = require('body-parser')
-app.use(cors())
+const userRoutes = require("./routes/user");
+const FicheSauceRoutes = require("./routes/FicheSauce");
 
-const path = require('path')
+//IMPORT DE : body-parser
+const bodyParser = require('body-parser');
 
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-//     next();
-//   });
-
-console.log("Test")
+//IMPORT DE : Mongoose
+const mongoose = require('mongoose');
 
 //Connection to MongoDB Database 
 mongoose.connect('mongodb+srv://clement:clem@piquantee.nl0h7sg.mongodb.net/?retryWrites=true&w=majority',
@@ -38,21 +33,23 @@ mongoose.connect('mongodb+srv://clement:clem@piquantee.nl0h7sg.mongodb.net/?retr
 
 // app.use((req, res, next) => {
 //     res.status(201)
-//     console.log("Premier middle")
+//     console.log("Premier middleware")
 //     res.json({message: "Voici la réponse serveur"})
 //     next()
 //   }
 // )
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 //LA ROUTE D'AUTHENTIFICATION
 app.use('/api/auth/', userRoutes);
 
 //LA ROUTE DE LA FICHE SAUCE
-app.use('/api/' , FicheSauceRoutes)
+app.use('/api/' , FicheSauceRoutes);
 
-app.use('/image', express.static(path.join(__dirname, 'image')))
+//Utilisation de l'application static afin de gérer l'enregistrement des fichiers aux formats image
+const path = require('path')
+app.use('/image', express.static(path.join(__dirname, 'image')));
 
-//MODULE EXPORTATION
+//EXPORTATION DU MODULE 
 module.exports = app;
