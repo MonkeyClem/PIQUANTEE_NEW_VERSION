@@ -13,14 +13,9 @@ app = express()
 //Utilisation du module CORS sur chacune des requêtes traitées 
 app.use(cors());
 
-console.log("--> Contenu de user - controllers/user.js")
-console.log(User)
 
 //Création de la fonction signup
 exports.signup = (req, res, next) => {
-
-    console.log("CONTENU DE : req.body (controllers/signup)")
-    console.log(req.body)
 
     //PASSWORD HASH
     bcrypt.hash(req.body.password, 10) /* L'algo sera exécuté 10 fois*/
@@ -31,8 +26,6 @@ exports.signup = (req, res, next) => {
             email: req.body.email,
             password : hash
         })
-        console.log("CONTENU DE : user")
-        console.log(user)
         //Envoi vers la base de données MongoDB Atlas
         user.save()
         .then(() => res.status(201).json({message: "Nouvel utilisateur crée et sauvegardé"}))
@@ -48,10 +41,7 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
 
 //LE CONTENU DE LA REQUETE
-console.log("CONTENU DE : req.body (controllers/login)")
-console.log(req.body.email)
-
-//First, we look into the database to know if the mail adress is already registered or not
+//D'abord, nous cherchons dans la database afin de savoir le mail est déjà enregistré ou non
 User.findOne({email: req.body.email})
     .then((user) => {
         if(!user){
@@ -61,14 +51,10 @@ User.findOne({email: req.body.email})
         //CONTROL THE PASSWORD 
         bcrypt.compare(req.body.password, user.password)
             .then((controlPassword) => {
-                console.log('résultat de controlPassword :')
-                console.log(controlPassword)
 
                 //Si le controle nous retourne false 
                 if(!controlPassword){
-                    console.log("Le MDP n'est pas correct")
                     throw("Le MDP n'est pas correct")
-                    //A VOIR AVEC RIDA : si res.status = HTTP ERROS SENDT
                     // res.status(401).json({error : 'Le mot de passe est incorrect'})
                 }
                 //The password is correct
