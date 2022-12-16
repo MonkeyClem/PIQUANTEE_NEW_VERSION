@@ -7,7 +7,7 @@ node_modules
 /out-tsc
 /bazel-out
 
-# Node
+# Nd
 /node_modules
 npm-debug.log
 yarn-error.log
