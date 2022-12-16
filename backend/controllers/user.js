@@ -13,6 +13,8 @@ app = express()
 //Utilisation du module CORS sur chacune des requêtes traitées 
 app.use(cors());
 
+//GITIGNORE GLOBAL -->
+//Plugin mongoose query logger
 
 //Création de la fonction signup
 exports.signup = (req, res, next) => {
@@ -63,6 +65,7 @@ User.findOne({email: req.body.email})
                         {userId: user._id},
                         `${process.env.JWT_KEY_TOKEN}`,
                         {expiresIn: 3600}
+                        //POSSIBILITE
                     )
                 })
         })
